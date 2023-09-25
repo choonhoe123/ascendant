@@ -6,11 +6,11 @@ import com.Ascendant.ascendant.model.Client;
 import com.Ascendant.ascendant.repository.CaseRepository;
 import com.Ascendant.ascendant.repository.ClientRepository;
 import org.springframework.beans.BeanUtils;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ClientServiceImpl implements ClientService{
@@ -30,7 +30,18 @@ public class ClientServiceImpl implements ClientService{
         clientRepository.save(clientEntity);
         return client;
     }
-
+    @Override
+    public Client findByClientId(Long id) {
+        Optional<ClientEntity> op = clientRepository.findById(id);
+        if (op.isEmpty()) {
+            return null;
+        } else {
+            Client c = new Client();
+            ClientEntity curr = op.get();
+            BeanUtils.copyProperties(curr, c);
+            return c;
+        }
+    }
     @Override
     public List<Client> getAllClients() {
         List<Client> clientList = new ArrayList<>();
@@ -44,19 +55,11 @@ public class ClientServiceImpl implements ClientService{
     }
 
     @Override
-    public Client findByClientId(Long clientId) {
-        Client client = new Client();
-        ClientEntity clientEntity = clientRepository.getReferenceById(clientId);
-        BeanUtils.copyProperties(clientEntity, client);
-        return client;
-    }
-
-    @Override
     public List<CaseEntity> findAllCasesByClientId(Long clientId) {
         List<CaseEntity> caseEntity = new ArrayList<>();
         List<ClientEntity> clientEntities = clientRepository.findByClientId(clientId);
         for(ClientEntity u : clientEntities) {
-            if (u.getId() == clientId) {
+            if (u.getClientId() == clientId) {
                 caseEntity = u.getCases();
             }
         }

@@ -18,6 +18,7 @@ public class Client {
     private String name;
     private int age;
     private String address;
+    @Temporal(TemporalType.TIMESTAMP)
     private Date birthday;
     private String Company;
     private List<CaseEntity> cases;

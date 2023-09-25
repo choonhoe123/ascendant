@@ -1,6 +1,7 @@
 package com.Ascendant.ascendant.controller;
 
 import com.Ascendant.ascendant.entity.CaseEntity;
+import com.Ascendant.ascendant.model.Case;
 import com.Ascendant.ascendant.model.Client;
 import com.Ascendant.ascendant.services.ClientServiceImpl;
 import org.springframework.http.ResponseEntity;
@@ -9,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1")
+@RequestMapping("/api")
 public class ClientController {
 
     private final ClientServiceImpl clientService;
@@ -17,23 +18,27 @@ public class ClientController {
         this.clientService = clientService;
     }
 
-    @PostMapping("/clients")
+    @PostMapping("/client")
     public Client createClient(@RequestBody Client client) {
         return clientService.createClient(client);
     }
 
-    @GetMapping("/clients")
-    public List<Client> getAllUsers() {
+    @GetMapping("/client")
+    public List<Client> getAllClients() {
         return clientService.getAllClients();
     }
 
-    @GetMapping("/clients/getCase/{clientId}")
-    public List<CaseEntity> findAllLoanRequestsByUserId(@PathVariable Long clientId) {
+    @GetMapping("/client/{id}")
+    public Client getClientById(@PathVariable long id) {
+        return clientService.findByClientId(id);
+    }
+    @GetMapping("/client/getCase/{clientId}")
+    public List<CaseEntity> findAllCasesByClientId(@PathVariable Long clientId) {
         return clientService.findAllCasesByClientId(clientId);
     }
 
-    @PutMapping("/clients/{clientId}")
-    public ResponseEntity<Client> updateUser(@PathVariable Long clientId, @RequestBody Client client) {
+    @PutMapping("/client/{clientId}")
+    public ResponseEntity<Client> updateClient(@PathVariable Long clientId, @RequestBody Client client) {
         client = clientService.updateClient(clientId, client);
         return ResponseEntity.ok(client);
     }

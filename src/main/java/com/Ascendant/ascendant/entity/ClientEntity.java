@@ -10,25 +10,25 @@ import java.util.List;
 
 @Entity
 @Data
-@Table(name = "clients")
+@Table(name = "Clients")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class ClientEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-    @NonNull
+    private long clientId;
+//    @NonNull
     private String name;
-    @NonNull
+//    @NonNull
     private int age;
-    @NonNull
+//    @NonNull
     private String address;
-    @NonNull
+//    @NonNull
     @Temporal(TemporalType.TIMESTAMP)
     private Date birthday;
-    @NonNull
-    private String Company;
-    @JsonIgnore
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "case")
+//    @NonNull
+    private String company;
+//    @JsonIgnore
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "client")
     private List<CaseEntity> cases;
 
 
@@ -37,7 +37,7 @@ public class ClientEntity {
         this.age = age;
         this.address = address;
         this.birthday = birthday;
-        Company = company;
+        this.company = company;
     }
 
     public ClientEntity() {
@@ -48,7 +48,7 @@ public class ClientEntity {
         this.age = age;
         this.address = address;
         this.birthday = birthday;
-        Company = company;
+        this.company = company;
         this.cases = cases;
     }
 
@@ -69,15 +69,15 @@ public class ClientEntity {
     }
 
     public void setCompany(String company) {
-        Company = company;
+        this.company = company;
     }
 
     public void setCases(List<CaseEntity> cases) {
         this.cases = cases;
     }
 
-    public long getId() {
-        return id;
+    public long getClientId() {
+        return clientId;
     }
 
     public String getName() {
@@ -97,7 +97,7 @@ public class ClientEntity {
     }
 
     public String getCompany() {
-        return Company;
+        return company;
     }
 
     public List<CaseEntity> getCases() {

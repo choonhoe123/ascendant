@@ -9,9 +9,12 @@ import java.util.Date;
 @Data
 public class Case {
     private long caseId;
+    @Temporal(TemporalType.TIMESTAMP)
     private Date createDate;
     private String title;
     private String msg;
     private ClientEntity client;
     private StatusEnum statusEnum;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date endDate;
 }

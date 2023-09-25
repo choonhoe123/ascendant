@@ -2,6 +2,7 @@ package com.Ascendant.ascendant.services;
 
 import com.Ascendant.ascendant.entity.CaseEntity;
 import com.Ascendant.ascendant.entity.ClientEntity;
+import com.Ascendant.ascendant.model.Case;
 import com.Ascendant.ascendant.model.Client;
 import org.springframework.beans.BeanUtils;
 import org.springframework.http.ResponseEntity;
@@ -14,12 +15,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public interface ClientService {
-    Client createClient(Client client);
-
-    List<Client> getAllClients();
-
+    Client createClient(@RequestBody Client client);
     Client findByClientId(@PathVariable Long clientId);
+    List<Client> getAllClients();
     List<CaseEntity> findAllCasesByClientId(@PathVariable Long clientId);
-
     Client updateClient(@PathVariable Long userId, @RequestBody Client client);
 }

@@ -1,5 +1,6 @@
 package com.Ascendant.ascendant;
 
+import com.Ascendant.ascendant.repository.CaseRepository;
 import com.Ascendant.ascendant.repository.ClientRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,8 +13,10 @@ public class AscendantApplication {
 
 
 	// think of this like your entity manager
-	@Autowired
-	private ClientRepository userEntityRepository;
+//	@Autowired
+//	private ClientRepository userEntityRepository;
+//	@Autowired
+//	private CaseRepository caseEntityRepository;
 	public static void main(String[] args) {
 		SpringApplication.run(AscendantApplication.class, args);
 	}
