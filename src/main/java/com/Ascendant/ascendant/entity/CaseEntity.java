@@ -3,6 +3,7 @@ package com.Ascendant.ascendant.entity;
 import com.Ascendant.ascendant.model.StatusEnum;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NonNull;
@@ -17,21 +18,22 @@ public class CaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long caseId;
-//    @NonNull
+    @NonNull
     @Temporal(TemporalType.TIMESTAMP)
     private Date createDate;
-//    @NonNull
+    @NonNull
     private String title;
     @NonNull
     private String msg;
-//    @JsonIgnore
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name="client")
-//    @NonNull
+    @NonNull
     private ClientEntity client;
-//    @NonNull
+    @NonNull
     @Enumerated(EnumType.STRING)
     private StatusEnum statusEnum;
+    @Nullable
     @Temporal(TemporalType.TIMESTAMP)
     private Date endDate;
     public CaseEntity() {

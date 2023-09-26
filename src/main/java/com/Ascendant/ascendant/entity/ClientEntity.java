@@ -16,18 +16,18 @@ public class ClientEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long clientId;
-//    @NonNull
+    @NonNull
     private String name;
-//    @NonNull
+    @NonNull
     private int age;
-//    @NonNull
+    @NonNull
     private String address;
-//    @NonNull
+    @NonNull
     @Temporal(TemporalType.TIMESTAMP)
     private Date birthday;
-//    @NonNull
+    @NonNull
     private String company;
-//    @JsonIgnore
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "client")
     private List<CaseEntity> cases;
 
