@@ -29,9 +29,10 @@ public class ClientController {
     }
 
     @GetMapping("/client/{id}")
-    public Client getClientById(@PathVariable long id) {
+    public Client findByClientId(@PathVariable long id) {
         return clientService.findByClientId(id);
     }
+
     @GetMapping("/client/getCase/{clientId}")
     public List<CaseEntity> findAllCasesByClientId(@PathVariable Long clientId) {
         return clientService.findAllCasesByClientId(clientId);

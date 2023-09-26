@@ -25,12 +25,12 @@ public class CaseController {
     }
 
     @GetMapping("/case/{id}")
-    public List<Case> getAllCases() {
-        return caseService.getAllCases();
+    public Case getCaseById(@PathVariable Long caseId) {
+        return caseService.getCaseById(caseId);
     }
     @GetMapping("/case")
-    public Case getCaseById(@PathVariable long id) {
-            return caseService.getCaseById(id);
+    public List<Case> getAllCases() {
+            return caseService.getAllCases();
     }
 
     @GetMapping("/case/getClient/{caseId}")
@@ -43,10 +43,14 @@ public class CaseController {
         c = caseService.updateCase(caseId, c);
         return ResponseEntity.ok(c);
     }
-
     @PutMapping("/case/endCase/{caseId}")
     public ResponseEntity<Case> endCase(@PathVariable Long caseId) {
         Case c = caseService.endCase(caseId);
         return ResponseEntity.ok(c);
     }
+    @GetMapping("/case/allOutstanding")
+    public List<Case> getAllOutstandingCases() {
+        return caseService.getAllOutstandingCases();
+    }
+
 }

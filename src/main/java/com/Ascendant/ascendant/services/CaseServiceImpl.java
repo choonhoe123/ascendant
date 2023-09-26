@@ -107,4 +107,16 @@ public class CaseServiceImpl implements CaseService{
         BeanUtils.copyProperties(updatedCase, output);
         return output;
     }
+
+    @Override
+    public List<Case> getAllOutstandingCases() {
+        List<CaseEntity> casesEntitty = caseRepository.findAll();
+        List<Case> cases = new ArrayList<>();
+        for (CaseEntity c : casesEntitty) {
+            Case casee = new Case();
+            BeanUtils.copyProperties(c, casee);
+            cases.add(casee);
+        }
+        return cases;
+    }
 }
