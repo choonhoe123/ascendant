@@ -22,10 +22,11 @@ git clone https://github.com/choonhoe123/ascendant.git in intellij
 create my sql schema "ascendant" in mysql workbench
 run dummyDataInit.sql in intellij ascendant\dummyDataInit.sql in intellij
 warning shows and click setup db connector and fill in username and password in intellij
-click on execute SQL script in intellij
+click on execute SQL script in intellij it should run normally
 under ascendant\src\main\resources\application.properties, change to personal sql username and password 
 build in intellij
 run: ascendant\AscendantApplication.java in intellij
+click on execute SQL script in intellij again to init dataset in intellij
 check mysql table and refresh table in  mysql workbench
 use postman to do api call
 
