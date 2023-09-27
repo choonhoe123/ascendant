@@ -19,8 +19,13 @@ public class ClientController {
     }
 
     @PostMapping("/client")
-    public Client createClient(@RequestBody Client client) {
-        return clientService.createClient(client);
+    public ResponseEntity<String> createClient(@RequestBody Client client) {
+        try {
+            Client createdC = clientService.createClient(client);
+            return ResponseEntity.ok("Case created successfully");
+        } catch (IllegalArgumentException ex) {
+            return ResponseEntity.badRequest().body("Invalid request: " + ex.getMessage());
+        }
     }
 
     @GetMapping("/client")

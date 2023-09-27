@@ -17,5 +17,6 @@ public interface CaseService {
     Case updateCase(@PathVariable Long caseId, @RequestBody Case c);
     Case endCase(@PathVariable Long caseId);
     List<Case> getAllOutstandingCases();
+    List<Case> getAllCompletedCases();
 }
 

@@ -28,6 +28,9 @@ public class CaseServiceImpl implements CaseService{
 
     @Override
     public Case createCase(Case c) {
+        if (c.getTitle() == null || c.getMsg() == null || c.getClient() == null) {
+            throw new IllegalArgumentException("Title, msg, and client are required fields.");
+        }
         c.setStatusEnum(StatusEnum.IN_PROGRESS);
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         Date startDate = new Date();
@@ -110,12 +113,28 @@ public class CaseServiceImpl implements CaseService{
 
     @Override
     public List<Case> getAllOutstandingCases() {
-        List<CaseEntity> casesEntitty = caseRepository.findAll();
+        List<CaseEntity> casesEntity = caseRepository.findAll();
         List<Case> cases = new ArrayList<>();
-        for (CaseEntity c : casesEntitty) {
-            Case casee = new Case();
-            BeanUtils.copyProperties(c, casee);
-            cases.add(casee);
+        for (CaseEntity c : casesEntity) {
+            if (c.getStatusEnum() == StatusEnum.IN_PROGRESS) {
+                Case casee = new Case();
+                BeanUtils.copyProperties(c, casee);
+                cases.add(casee);
+            }
+        }
+        return cases;
+    }
+
+    @Override
+    public List<Case> getAllCompletedCases() {
+        List<CaseEntity> casesEntity = caseRepository.findAll();
+        List<Case> cases = new ArrayList<>();
+        for (CaseEntity c : casesEntity) {
+            if (c.getStatusEnum() == StatusEnum.COMPLETED) {
+                Case casee = new Case();
+                BeanUtils.copyProperties(c, casee);
+                cases.add(casee);
+            }
         }
         return cases;
     }

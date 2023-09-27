@@ -25,6 +25,9 @@ public class ClientServiceImpl implements ClientService{
 
     @Override
     public Client createClient(Client client) {
+        if (client.getName() == null || client.getAge() == 0 || client.getAddress() == null || client.getBirthday() == null || client.getCompany() == null) {
+            throw new IllegalArgumentException("Name, age, address, birthday, and company are required fields.");
+        }
         ClientEntity clientEntity = new ClientEntity();
         BeanUtils.copyProperties(client, clientEntity);
         clientRepository.save(clientEntity);

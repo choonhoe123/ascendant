@@ -20,11 +20,16 @@ public class CaseController {
     }
 
     @PostMapping("/case")
-    public Case createCase(@RequestBody Case c) {
-        return caseService.createCase(c);
+    public ResponseEntity<String> createCase(@RequestBody Case c) {
+        try {
+            Case createdCase = caseService.createCase(c);
+            return ResponseEntity.ok("Case created successfully");
+        } catch (IllegalArgumentException ex) {
+            return ResponseEntity.badRequest().body("Invalid request: " + ex.getMessage());
+        }
     }
 
-    @GetMapping("/case/{id}")
+    @GetMapping("/case/{caseId}")
     public Case getCaseById(@PathVariable Long caseId) {
         return caseService.getCaseById(caseId);
     }
@@ -53,4 +58,8 @@ public class CaseController {
         return caseService.getAllOutstandingCases();
     }
 
+    @GetMapping("/case/allCompleted")
+    public List<Case> getAllCompletedCases() {
+        return caseService.getAllCompletedCases();
+    }
 }
